@@ -1,0 +1,256 @@
+# Telegram 多 Agent 配置方案
+
+## 1. Telegram Bot 配置结构
+
+需要在 `channels.telegram.accounts` 下为每个 agent 配置独立的 bot：
+
+```json
+"channels": {
+  "telegram": {
+    "enabled": true,
+    "accounts": {
+      "xiaomei": {
+        "enabled": true,
+        "botToken": "YOUR_XIAOMEI_BOT_TOKEN",
+        "markdownSupport": true
+      },
+      "xiaoma": {
+        "enabled": true,
+        "botToken": "YOUR_XIAOMA_BOT_TOKEN",
+        "markdownSupport": true
+      },
+      "xiaohua": {
+        "enabled": true,
+        "botToken": "YOUR_XIAOHUA_BOT_TOKEN",
+        "markdownSupport": true
+      },
+      "xiaobi": {
+        "enabled": true,
+        "botToken": "YOUR_XIAOBI_BOT_TOKEN",
+        "markdownSupport": true
+      },
+      "xiaozhang": {
+        "enabled": true,
+        "botToken": "YOUR_XIAOZHANG_BOT_TOKEN",
+        "markdownSupport": true
+      },
+      "xiaofeng": {
+        "enabled": true,
+        "botToken": "YOUR_XIAOFENG_BOT_TOKEN",
+        "markdownSupport": true
+      },
+      "xiaomei_media": {
+        "enabled": true,
+        "botToken": "YOUR_XIAOMEI_MEDIA_BOT_TOKEN",
+        "markdownSupport": true
+      },
+      "xiaodun": {
+        "enabled": true,
+        "botToken": "YOUR_XIAODUN_BOT_TOKEN",
+        "markdownSupport": true
+      }
+    }
+  }
+}
+```
+
+## 2. Agent 绑定配置
+
+需要在 `bindings` 数组中添加 telegram 绑定：
+
+```json
+"bindings": [
+  // 现有的飞书、QQbot 绑定...
+  {
+    "agentId": "main",
+    "match": { "channel": "feishu", "accountId": "main" }
+  },
+  {
+    "agentId": "dev",
+    "match": { "channel": "feishu", "accountId": "dev" }
+  },
+  // ... 其他飞书绑定
+
+  // Telegram 绑定（新增）
+  {
+    "agentId": "main",
+    "match": { "channel": "telegram", "accountId": "xiaomei" }
+  },
+  {
+    "agentId": "dev",
+    "match": { "channel": "telegram", "accountId": "xiaoma" }
+  },
+  {
+    "agentId": "design",
+    "match": { "channel": "telegram", "accountId": "xiaohua" }
+  },
+  {
+    "agentId": "content",
+    "match": { "channel": "telegram", "accountId": "xiaobi" }
+  },
+  {
+    "agentId": "finance",
+    "match": { "channel": "telegram", "accountId": "xiaozhang" }
+  },
+  {
+    "agentId": "growth",
+    "match": { "channel": "telegram", "accountId": "xiaofeng" }
+  },
+  {
+    "agentId": "media",
+    "match": { "channel": "telegram", "accountId": "xiaomei_media" }
+  },
+  {
+    "agentId": "legal",
+    "match": { "channel": "telegram", "accountId": "xiaodun" }
+  }
+]
+```
+
+## 3. Agent 配置保持不变
+
+你的 agents 配置已经很好了：
+
+```json
+"agents": {
+  "defaults": {
+    "model": { "primary": "moonshot/kimi-k2.5" },
+    "workspace": "/root/.openclaw/workspace",
+    "maxConcurrent": 4,
+    "subagents": { "maxConcurrent": 8 }
+  },
+  "list": [
+    { "id": "main", "default": true, "name": "张小妹" },
+    { "id": "dev", "name": "小码", "workspace": "/root/.openclaw/workspace/workspace-dev", "agentDir": "/root/.openclaw/agents/dev" },
+    { "id": "design", "name": "小画", "workspace": "/root/.openclaw/workspace/workspace-design", "agentDir": "/root/.openclaw/agents/design" },
+    { "id": "content", "name": "小笔", "workspace": "/root/.openclaw/workspace/workspace-content", "agentDir": "/root/.openclaw/agents/content" },
+    { "id": "finance", "name": "小账", "workspace": "/root/.openclaw/workspace/workspace-finance", "agentDir": "/root/.openclaw/agents/finance" },
+    { "id": "growth", "name": "小风", "workspace": "/root/.openclaw/workspace/workspace-growth", "agentDir": "/root/.openclaw/agents/growth" },
+    { "id": "media", "name": "小媒", "workspace": "/root/.openclaw/workspace/workspace-media", "agentDir": "/root/.openclaw/agents/media" },
+    { "id": "legal", "name": "小盾", "workspace": "/root/.openclaw/workspace/workspace-legal", "agentDir": "/root/.openclaw/agents/legal" }
+  ]
+}
+```
+
+## 4. 工作原理
+
+### 单 Gateway 实例
+- 所有 Telegram bot 共享一个 Gateway 进程
+- 通过 `accountId` 区分不同的 bot 账号
+- Gateway 根据 bindings 自动路由消息到对应的 agent
+
+### 工作空间隔离
+- 每个 agent 有独立的 workspace 目录
+- `workspace-dev/`, `workspace-design/`, `workspace-content/` 等
+- 每个 agent 有自己的 SOUL.md、MEMORY.md、memory/
+- 数据完全隔离，互不干扰
+
+### Agent 间通信
+- 通过 `sessions_send()` 工具实现
+- 例如：张小妹调用小码写代码
+  ```javascript
+  sessions_send(sessionKey="dev", message="帮我实现这个功能...")
+  ```
+- 张小妹调用小笔写文案
+  ```javascript
+  sessions_send(sessionKey="content", message="帮我写一段公众号开头...")
+  ```
+
+## 5. 使用场景示例
+
+### 场景 1：在 Telegram 群中 @ 小码
+```
+用户: @xiaoma_bot 帮我看看这段代码有没有 bug
+→ 消息路由到 dev agent
+→ dev agent 处理并回复
+```
+
+### 场景 2：张小妹协调多个 agent
+```
+用户: 帮我做一个着陆页
+→ 张小妹接收任务
+→ 调用 design agent: sessions_send(sessionKey="design", message="设计着陆页...")
+→ 调用 dev agent: sessions_send(sessionKey="dev", message="实现着陆页代码...")
+→ 汇总结果回复用户
+```
+
+### 场景 3：单独私信某个 bot
+```
+用户: 私信 @xiaobi_bot
+→ 直接与 content agent 对话
+→ 内容创作相关任务
+```
+
+## 6. 获取 Telegram Bot Token
+
+1. 在 Telegram 中搜索 @BotFather
+2. 发送 `/newbot`
+3. 按提示创建 bot（设置名称、用户名）
+4. 获取 token（格式：`123456789:ABCdefGHIjklMNOpqrsTUVwxyz`）
+5. 为每个 agent 重复此步骤
+
+需要创建 8 个 bot：
+- @xiaomei_bot (张小妹)
+- @xiaoma_bot (小码)
+- @xiaohua_bot (小画)
+- @xiaobi_bot (小笔)
+- @xiaozhang_bot (小账)
+- @xiaofeng_bot (小风)
+- @xiaomei_media_bot (小媒)
+- @xiaodun_bot (小盾)
+
+## 7. 部署步骤
+
+### 步骤 1：创建所有 Telegram Bot
+```bash
+# 通过 BotFather 创建 8 个 bot
+# 记录所有 bot token
+```
+
+### 步骤 2：修改配置文件
+编辑 `~/.openclaw/config.json`：
+1. 添加 `channels.telegram` 配置
+2. 添加 telegram bindings
+3. 替换 `YOUR_XXX_BOT_TOKEN` 为实际 token
+
+### 步骤 3：重启 Gateway
+```bash
+openclaw gateway restart
+```
+
+### 步骤 4：创建 Telegram 群
+1. 创建一个新群组
+2. 邀请所有 8 个 bot 加入
+3. 给每个 bot 设置管理员权限（可选）
+
+### 步骤 5：测试
+```
+在群中发送: @xiaoma_bot 你好
+→ 应该收到小码的回复
+```
+
+## 8. 优势
+
+### ✅ 单 Gateway 管理
+- 一个进程，资源占用少
+- 统一配置，便于维护
+- 所有 agent 共享同一个进程池
+
+### ✅ 工作空间隔离
+- 每个 agent 独立数据
+- 互不干扰，安全可靠
+- 便于调试和问题排查
+
+### ✅ 灵活通信
+- sessions_send() 支持跨 agent 调用
+- 张小妹可以协调所有子 agent
+- 支持 1 对 1 和群组对话
+
+### ✅ 可扩展性
+- 需要新功能？新增 agent 即可
+- 每个 agent 可以有自己的技能组合
+- 模块化设计，易于管理
+
+## 9. 完整配置示例
+
+见 `telegram-config-complete.json` 文件

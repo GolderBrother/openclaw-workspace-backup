@@ -1,0 +1,667 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.17",
+    "lastTouchedAt": "2026-02-22T07:57:00.000Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-02-15T06:49:26.642Z",
+    "lastRunVersion": "2026.2.12",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "kimi-coding:default": {
+        "provider": "kimi-coding",
+        "mode": "api_key"
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "moonshot": {
+        "baseUrl": "https://api.moonshot.cn/v1",
+        "apiKey": "sk-kimi-58s4Q7BpsJOvVu8XSlYVskaEr2bn5mzV61Dnx85QvGSjFZEcX0fkDR41xvxJbEhS",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "kimi-k2-thinking",
+            "name": "Kimi K2 Thinking",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "kimi-k2-thinking-turbo",
+            "name": "Kimi K2 Thinking Turbo",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "kimi-k2.5",
+            "name": "Kimi K2.5",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "moonshot-v1-128k",
+            "name": "Moonshot V1 128K",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "hunyuan": {
+        "baseUrl": "https://api.hunyuan.cloud.tencent.com/v1",
+        "apiKey": "sk-5AJI4GtWqbf3PTMRUJaqKbvIeMDllCZYmAfED7t0p9dMjCih",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "hunyuan-turbos-latest",
+            "name": "混元 TurboS Latest",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "hunyuan-t1-latest",
+            "name": "混元 T1 Latest",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "deepseek": {
+        "baseUrl": "https://api.deepseek.com/v1",
+        "apiKey": "sk-4a24b6c51c834a8dac6a22d9a4d74c82",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "deepseek-chat",
+            "name": "DeepSeek Chat",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "deepseek-reasoner",
+            "name": "DeepSeek Reasoner",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "glmcode": {
+        "baseUrl": "https://open.bigmodel.cn/api/coding/paas/v4",
+        "apiKey": "bb10ff0661ee485e9b53b2b76d3736ac.kmm3x5JQVJckPahx",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "glm-4.7",
+            "name": "GLM-4.7",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "glm-5",
+            "name": "GLM-5",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "glm-4.6",
+            "name": "GLM-4.6",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "glm-4.5-air",
+            "name": "GLM-4.5-Air",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "glm-4.5",
+            "name": "GLM-4.5",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "glm-vision": {
+        "baseUrl": "https://open.bigmodel.cn/api/paas/v4",
+        "apiKey": "bb10ff0661ee485e9b53b2b76d3736ac.kmm3x5JQVJckPahx",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "glm-4v-plus",
+            "name": "GLM-4V Plus 图片识别",
+            "reasoning": false,
+            "input": ["text", "image"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 8192,
+            "maxTokens": 4096
+          }
+        ]
+      },
+      "glm-image": {
+        "baseUrl": "https://open.bigmodel.cn/api/paas/v4",
+        "apiKey": "bb10ff0661ee485e9b53b2b76d3736ac.kmm3x5JQVJckPahx",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "cogview-4",
+            "name": "CogView-4 图片生成",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 8192,
+            "maxTokens": 4096
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "moonshot/kimi-k2.5"
+      },
+      "imageModel": {
+        "primary": "glm-vision/glm-4v-plus"
+      },
+      "models": {
+        "kimi-coding/k2p5": {
+          "alias": "Kimi K2.5"
+        },
+        "glm-vision/glm-4v-plus": {
+          "alias": "GLM-4V Plus"
+        },
+        "glm-image/cogview-4": {
+          "alias": "CogView-4"
+        }
+      },
+      "workspace": "/root/.openclaw/workspace",
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "default": true,
+        "name": "张小妹"
+      },
+      {
+        "id": "dev",
+        "name": "小码",
+        "workspace": "/root/.openclaw/workspace/workspace-dev",
+        "agentDir": "/root/.openclaw/agents/dev"
+      },
+      {
+        "id": "design",
+        "name": "小画",
+        "workspace": "/root/.openclaw/workspace/workspace-design",
+        "agentDir": "/root/.openclaw/agents/design"
+      },
+      {
+        "id": "content",
+        "name": "小笔",
+        "workspace": "/root/.openclaw/workspace/workspace-content",
+        "agentDir": "/root/.openclaw/agents/content"
+      },
+      {
+        "id": "finance",
+        "name": "小账",
+        "workspace": "/root/.openclaw/workspace/workspace-finance",
+        "agentDir": "/root/.openclaw/agents/finance"
+      },
+      {
+        "id": "growth",
+        "name": "小风",
+        "workspace": "/root/.openclaw/workspace/workspace-growth",
+        "agentDir": "/root/.openclaw/agents/growth"
+      },
+      {
+        "id": "media",
+        "name": "小媒",
+        "workspace": "/root/.openclaw/workspace/workspace-media",
+        "agentDir": "/root/.openclaw/agents/media"
+      },
+      {
+        "id": "legal",
+        "name": "小盾",
+        "workspace": "/root/.openclaw/workspace/workspace-legal",
+        "agentDir": "/root/.openclaw/agents/legal"
+      }
+    ]
+  },
+  "tools": {
+    "agentToAgent": {
+      "enabled": true,
+      "allow": [
+        "main",
+        "dev",
+        "design",
+        "content",
+        "finance",
+        "growth",
+        "media",
+        "legal"
+      ]
+    }
+  },
+  "bindings": [
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "feishu",
+        "accountId": "main"
+      }
+    },
+    {
+      "agentId": "dev",
+      "match": {
+        "channel": "feishu",
+        "accountId": "dev"
+      }
+    },
+    {
+      "agentId": "design",
+      "match": {
+        "channel": "feishu",
+        "accountId": "design"
+      }
+    },
+    {
+      "agentId": "content",
+      "match": {
+        "channel": "feishu",
+        "accountId": "content"
+      }
+    },
+    {
+      "agentId": "finance",
+      "match": {
+        "channel": "feishu",
+        "accountId": "finance"
+      }
+    },
+    {
+      "agentId": "growth",
+      "match": {
+        "channel": "feishu",
+        "accountId": "growth"
+      }
+    },
+    {
+      "agentId": "media",
+      "match": {
+        "channel": "feishu",
+        "accountId": "media"
+      }
+    },
+    {
+      "agentId": "legal",
+      "match": {
+        "channel": "feishu",
+        "accountId": "legal"
+      }
+    },
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "qqbot",
+        "accountId": "xiaomei"
+      }
+    },
+    {
+      "agentId": "dev",
+      "match": {
+        "channel": "qqbot",
+        "accountId": "xiaoma"
+      }
+    },
+    {
+      "agentId": "design",
+      "match": {
+        "channel": "qqbot",
+        "accountId": "xiaohua"
+      }
+    },
+    {
+      "agentId": "content",
+      "match": {
+        "channel": "qqbot",
+        "accountId": "xiaobi"
+      }
+    },
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "telegram",
+        "accountId": "xiaomei"
+      }
+    },
+    {
+      "agentId": "dev",
+      "match": {
+        "channel": "telegram",
+        "accountId": "xiaoma"
+      }
+    },
+    {
+      "agentId": "design",
+      "match": {
+        "channel": "telegram",
+        "accountId": "xiaohua"
+      }
+    },
+    {
+      "agentId": "content",
+      "match": {
+        "channel": "telegram",
+        "accountId": "xiaobi"
+      }
+    },
+    {
+      "agentId": "finance",
+      "match": {
+        "channel": "telegram",
+        "accountId": "xiaozhang"
+      }
+    },
+    {
+      "agentId": "growth",
+      "match": {
+        "channel": "telegram",
+        "accountId": "xiaofeng"
+      }
+    },
+    {
+      "agentId": "media",
+      "match": {
+        "channel": "telegram",
+        "accountId": "xiaomei_media"
+      }
+    },
+    {
+      "agentId": "legal",
+      "match": {
+        "channel": "telegram",
+        "accountId": "xiaodun"
+      }
+    },
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "wecom"
+      }
+    }
+  ],
+  "messages": {
+    "ackReactionScope": "all"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true
+  },
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "command-logger": {
+          "enabled": true
+        },
+        "session-memory": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "channels": {
+    "qqbot": {
+      "enabled": true,
+      "accounts": {
+        "xiaomei": {
+          "enabled": true,
+          "appId": 102855498,
+          "clientSecret": "BHNTahpx6FPZkv7JWjxBQfvBSj1JbuDX",
+          "markdownSupport": false
+        },
+        "xiaoma": {
+          "enabled": true,
+          "appId": 102857532,
+          "clientSecret": "WTRPONNNOPRTWaejou07EMUdmw7IUgt6",
+          "markdownSupport": false
+        },
+        "xiaohua": {
+          "enabled": true,
+          "appId": 102853835,
+          "clientSecret": "73zwtrqpppqrtvy15AFLRYfnv4DNYjv7",
+          "markdownSupport": false
+        },
+        "xiaobi": {
+          "enabled": true,
+          "appId": 102857578,
+          "clientSecret": "ZGygP8scN8ugTG4shWMC3umeXRLGB730",
+          "markdownSupport": false
+        }
+      }
+    },
+    "feishu": {
+      "enabled": true,
+      "domain": "feishu",
+      "groupPolicy": "open",
+      "accounts": {
+        "main": {
+          "enabled": true,
+          "appId": "cli_a91dbbaa51b89cc5",
+          "appSecret": "ZBVvzBPF7zVbZ9GqJLhelgMSHPZG2oOK"
+        },
+        "dev": {
+          "enabled": true,
+          "appId": "cli_a91db612ae38dcbd",
+          "appSecret": "LvPS1jGsC7gUoM3CxRvzzh0dJgBFMjIu"
+        },
+        "design": {
+          "enabled": true,
+          "appId": "cli_a91db6da4b389cd9",
+          "appSecret": "4czTUPJsbGFlPKIPTllObgsQADSWuqnL"
+        },
+        "content": {
+          "enabled": true,
+          "appId": "cli_a91db7ad3d21dcc1",
+          "appSecret": "yZ1Pz3bGBdIcNUDLFHW8hGzi10nDl5oi"
+        },
+        "finance": {
+          "enabled": true,
+          "appId": "cli_a91db09d3af8dcc0",
+          "appSecret": "quqS2nIJpnUBtVxoE2uOBhrBmudWVhqS"
+        },
+        "growth": {
+          "enabled": true,
+          "appId": "cli_a91db1dc8d389cc5",
+          "appSecret": "Fr0U7FSI7sHFpAjPjVZ6zfYZ4rgyLuPj"
+        },
+        "media": {
+          "enabled": true,
+          "appId": "cli_a91db2042c38dcc8",
+          "appSecret": "5kyxM70hwdYpNeRbSFIAIdv7mgeFSv11"
+        },
+        "legal": {
+          "enabled": true,
+          "appId": "cli_a91db26e67615ced",
+          "appSecret": "UquO4xTER5wrSajHq2uo5bXUbqcHd8tD"
+        }
+      },
+      "groupChatConfig": {
+        "mentionDetection": "auto",
+        "respondToMentions": true,
+        "allowGroupMessages": true
+      }
+    },
+    "telegram": {
+      "enabled": true,
+      "accounts": {
+        "xiaomei": {
+          "enabled": true,
+          "botToken": "YOUR_XIAOMEI_BOT_TOKEN",
+          "markdownSupport": true
+        },
+        "xiaoma": {
+          "enabled": true,
+          "botToken": "YOUR_XIAOMA_BOT_TOKEN",
+          "markdownSupport": true
+        },
+        "xiaohua": {
+          "enabled": true,
+          "botToken": "YOUR_XIAOHUA_BOT_TOKEN",
+          "markdownSupport": true
+        },
+        "xiaobi": {
+          "enabled": true,
+          "botToken": "YOUR_XIAOBI_BOT_TOKEN",
+          "markdownSupport": true
+        },
+        "xiaozhang": {
+          "enabled": true,
+          "botToken": "YOUR_XIAOZHANG_BOT_TOKEN",
+          "markdownSupport": true
+        },
+        "xiaofeng": {
+          "enabled": true,
+          "botToken": "YOUR_XIAOFENG_BOT_TOKEN",
+          "markdownSupport": true
+        },
+        "xiaomei_media": {
+          "enabled": true,
+          "botToken": "YOUR_XIAOMEI_MEDIA_BOT_TOKEN",
+          "markdownSupport": true
+        },
+        "xiaodun": {
+          "enabled": true,
+          "botToken": "YOUR_XIAODUN_BOT_TOKEN",
+          "markdownSupport": true
+        }
+      },
+      "groupChatConfig": {
+        "mentionDetection": "auto",
+        "respondToMentions": true,
+        "allowGroupMessages": true
+      }
+    },
+    "wecom": {
+      "enabled": true
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "controlUi": {
+      "allowInsecureAuth": true
+    },
+    "auth": {
+      "mode": "token",
+      "token": "4bf41c4b87bf173f1874ab64b39d6fa88ab0378defc65dcb"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    }
+  },
+  "skills": {
+    "install": {
+      "nodeManager": "npm"
+    }
+  },
+  "plugins": {
+    "entries": {
+      "ddingtalk": {
+        "enabled": true
+      },
+      "wecom": {
+        "enabled": true
+      },
+      "adp-openclaw": {
+        "enabled": true
+      },
+      "qqbot": {
+        "enabled": true
+      }
+    },
+    "installs": {
+      "ddingtalk": {
+        "source": "npm",
+        "spec": "git+https://cnb.cool/lighthouse/lighthousebackend/openclaw-dingtalk.git",
+        "installPath": "/root/.openclaw/extensions/ddingtalk",
+        "version": "1.2.0",
+        "installedAt": "2026-02-11T09:49:01.618Z"
+      },
+      "wecom": {
+        "source": "npm",
+        "spec": "git+https://cnb.cool/lighthouse/lighthousebackend/openclaw-wecom.git",
+        "installPath": "/root/.openclaw/extensions/wecom",
+        "version": "2026.2.5",
+        "installedAt": "2026-02-11T09:49:25.555Z"
+      },
+      "adp-openclaw": {
+        "source": "npm",
+        "spec": "adp-openclaw",
+        "installPath": "/root/.openclaw/extensions/adp-openclaw",
+        "version": "0.0.24",
+        "installedAt": "2026-02-11T09:49:33.241Z"
+      },
+      "qqbot": {
+        "source": "npm",
+        "spec": "@openclaw-china/qqbot",
+        "installPath": "/root/.openclaw/extensions/qqbot",
+        "version": "0.1.4",
+        "installedAt": "2026-02-13T14:11:17.289Z"
+      }
+    }
+  }
+}
