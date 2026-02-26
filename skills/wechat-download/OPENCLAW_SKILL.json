@@ -1,0 +1,53 @@
+{
+  "id": "wechat-download",
+  "name": "微信文章下载（Playwright）",
+  "description": "使用 Playwright 自动化浏览器下载微信文章",
+  "version": "1.0.0",
+  "author": "小码",
+  "dependencies": {
+    "system": {
+      "vncserver": "x11vnc-server",
+      "chromium-browser": "chromium-browser"
+    },
+    "npm": [
+      "playwright"
+    ]
+  },
+  "tools": [
+    {
+      "id": "wechat_download_start_browser",
+      "name": "启动浏览器服务",
+      "description": "启动 Chromium 浏览器服务（支持 VNC 连接）",
+      "parameters": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "id": "wechat_download_fetch",
+      "name": "获取微信文章",
+      "description": "获取微信公众号文章内容（需要浏览器服务运行）",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "微信文章链接",
+            "required": true
+          }
+        },
+        "required": ["url"]
+      }
+    }
+  ],
+  "settings": {
+    "enabled": true,
+    "timeout": 60000
+  },
+  "notes": [
+    "需要先运行: wechat-download start-browser",
+    "VNC 连接: <服务器IP>:5901",
+    "VNC 密码: (首次运行时设置）",
+    "注意: 微信有反爬虫机制，可能需要手动登录"
+  ]
+}

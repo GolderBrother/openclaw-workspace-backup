@@ -1,0 +1,77 @@
+{
+  "id": "aivectormemory-autolog",
+  "name": "AIVectorMemory 自动记录",
+  "description": "自动将对话内容记录到 AIVectorMemory 记忆库",
+  "version": "1.0.0",
+  "author": "小码",
+  "settings": {
+    "enabled": true,
+    "autoRun": false,
+    "timeout": 10000
+  },
+  "capabilities": [
+    "记录对话内容",
+    "语义搜索历史记录",
+    "跨会话保持记忆"
+  ],
+  "tools": [
+    {
+      "id": "aivectormemory_log",
+      "name": "记录到 AIVectorMemory",
+      "description": "将消息内容记录到 AIVectorMemory HTTP API",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "要记录的内容"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "标签（可选，多个标签用逗号分隔）",
+            "default": []
+          }
+        },
+        "required": ["content"]
+      }
+    }
+  ],
+  "dependencies": {
+    "services": [
+      {
+        "name": "AIVectorMemory HTTP API",
+        "url": "http://127.0.0.1:9080",
+        "required": true
+      }
+    ],
+    "npm": []
+  },
+  "examples": [
+    {
+      "description": "记录用户需求",
+      "input": {
+        "content": "用户需要配置 Seedance 2.0 生成图片",
+        "tags": ["#用户", "#需求"]
+      },
+      "output": "✅ 已记录到记忆库"
+    },
+    {
+      "description": "记录部署完成",
+      "input": {
+        "content": "xiaozhan 项目部署到 Vercel 成功",
+        "tags": ["#部署", "#完成"]
+      },
+      "output": "✅ 已记录到记忆库"
+    }
+  ],
+  "notes": [
+    "需要先启动 AIVectorMemory 服务:",
+    "cd ~/code/aivectormemory && python3 -m aivectormemory web --port 9080",
+    "",
+    "当前只实现了记录功能，搜索和更新需要后续实现",
+    "AIVectorMemory 数据库: ~/.aivectormemory/memory.db"
+  ]
+}

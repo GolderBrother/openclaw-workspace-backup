@@ -4,6 +4,30 @@
     "agent-browser": {
       "version": "0.2.0",
       "installedAt": 1770803375381
+    },
+    "android-adb": {
+      "version": "1.0.0",
+      "installedAt": 1771921201696
+    },
+    "polymarket-odds": {
+      "version": "1.0.0",
+      "installedAt": 1771921270291
+    },
+    "tavily-search": {
+      "version": "1.0.0",
+      "installedAt": 1771921392901
+    },
+    "telegram-bot-chat": {
+      "version": "1.0.0",
+      "installedAt": 1771921414194
+    },
+    "relay-to-agent": {
+      "version": "0.0.1",
+      "installedAt": 1771924331809
+    },
+    "chrome": {
+      "version": "1.0.0",
+      "installedAt": 1771924871360
     }
   }
 }

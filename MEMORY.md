@@ -38,6 +38,26 @@
 - Workspace整理很重要，文件要齐全
 - AGENTS.md/IDENTITY.md/SOUL.md/MEMORY.md/TOOLS.md/USER.md 一个不能少
 
+### 系统配置更新（2026-02）
+**多机器人系统状态：**
+- 飞书平台：8个独立机器人已配置（main/dev/design/content/finance/growth/media/legal）
+- Telegram平台：xiaomei bot 已连接，配置正常
+- 路由机制：群组 @ 机制已测试，bindings 配置完善
+- 常见问题：context 满了需要重启，webhook/polling 模式切换
+
+**最近问题记录：**
+- Telegram bot context 100% 导致无法回复 → 需要重启清理
+- 飞书 bindings 缺少 peer.id 导致 @ 无效 → 已修复
+- 需要定期监控会话状态和 context 使用率
+- **Telegram accounts 不支持 username 字段** - 添加导致 gateway 启动失败（2026-02-26）
+
+### Telegram 配置重要教训（2026-02-26）
+- ❌ 不要给 `channels.telegram.accounts` 添加 `username` 字段
+- ✅ bindings 用内部 accountId（如 `xiaoma`），不是公开的 @ username
+- ✅ Telegram 会自动从 bot token 获取 username
+- ✅ `groupPolicy` 应该是 `"allowlist"`，不是 `"open"`
+- ✅ 修改配置前先检查配置格式和允许的字段
+
 ### 小笔写作框架更新（2026-02-16）
 - 已完成：解读10篇孟健文章写作思路
 - 已记录到：`memory/2026-02-16-writing-framework-mengjian.md`（第1篇）

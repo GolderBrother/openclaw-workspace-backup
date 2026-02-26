@@ -1,5 +1,7 @@
 # AGENTS.md - Your Workspace
 
+⚠️ **修改配置前先 git commit**：改任何核心配置文件之前，先 `git add -A && git commit -m "改动前快照"`，确保能随时还原。
+
 This folder is home. Treat it that way.
 
 ## First Run
