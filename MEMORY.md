@@ -33,10 +33,14 @@
 
 ### 待办
 - 帮James搭建好多Agent系统 ✅
+- 浏览器自动化测试 (2026-02-26) ✅
+- 微信公众号文章访问（待解决）
+- 清理 nano banana 生图模型待办重复记录（保留1条）⚠️
 
 ### 学到的教训
 - Workspace整理很重要，文件要齐全
 - AGENTS.md/IDENTITY.md/SOUL.md/MEMORY.md/TOOLS.md/USER.md 一个不能少
+- **优先使用 aivectormemory 服务的 /recall (语义搜索)来查询记忆**（2026-02-27）
 
 ### 系统配置更新（2026-02）
 **多机器人系统状态：**
