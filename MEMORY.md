@@ -77,6 +77,43 @@
 - MCP 集成：视觉理解、联网搜索、网页读取、开源仓库
 - IDE 插件：Claude Code, OpenCode, Cursor
 
+### 备份策略（2026-03-01）
+**三层备份策略（血泪总结）：**
+
+1. **每日自动备份（GitHub）**
+   - 脚本：`scripts/backup-daily.sh`
+   - 备份内容：SOUL.md、MEMORY.md、AGENTS.md、IDENTITY.md、最近7天 daily memory
+   - 执行方式：cron 定时任务（每天凌晨2点）
+   - 命令：`0 2 * * * /root/.openclaw/workspace/scripts/backup-daily.sh`
+
+2. **每周手动备份（云盘）**
+   - 脚本：`scripts/backup-weekly.sh`
+   - 备份内容：完整 workspace 打包（排除 .git、node_modules）
+   - 执行方式：手动执行后上传云盘
+   - 输出：`backups/openclaw-workspace-weekXX.tar.gz`
+
+3. **配置修改前快照**
+   - 脚本：`scripts/backup-snapshot.sh`
+   - 用法：修改配置前先快照
+   - 快照位置：`snaphots/*.bak`
+   - 快速方式：`cp MEMORY.md MEMORY.md.bak`
+
+**重要教训：**
+- 备份不是可选项，是必选项
+- 没 MEMORY.md = 之前的调教全白费
+- 花5分钟配置备份 = 省几十小时重新调教时间
+
+**相关文档：**
+- `BACKUP.md` - 完整的备份策略说明
+- `scripts/backup-daily.sh` - 每日自动备份脚本
+- `scripts/backup-weekly.sh` - 每周手动备份脚本
+- `scripts/backup-snapshot.sh` - 快照脚本
+
+**待完成：**
+- [ ] 配置 GitHub 远程仓库
+- [ ] 配置 cron 定时任务
+- [ ] 测试所有备份脚本
+
 ### Telegram 配置重要教训（2026-02-26）
 - ❌ 不要给 `channels.telegram.accounts` 添加 `username` 字段
 - ✅ bindings 用内部 accountId（如 `xiaoma`），不是公开的 @ username
