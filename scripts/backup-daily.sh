@@ -1,38 +1,40 @@
 #!/bin/bash
-# 每日自动备份脚本
-# 备份最重要的记忆文件到 GitHub
+# 每日自动备份脚本 - 智能版本
+# 只在有改动时才提交和推送，避免空提交
 
-set -e  # 遇到错误立即退出
+set -e
 
 # 颜色输出
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+RED='\033[0;31m'
+NC='\033[0m'
 
 # 日志函数
 log() {
     echo -e "${GREEN}[Backup]${NC} $1"
 }
-
 warn() {
     echo -e "${YELLOW}[Backup]${NC} $1"
+}
+error() {
+    echo -e "${RED}[Backup]${NC} $1"
 }
 
 # 日期
 DATE=$(date +%Y-%m-%d)
 TIME=$(date +%H:%M:%S)
 
-log "开始每日备份 - $DATE $TIME"
+log "开始每日备份检查 - $DATE $TIME"
 
 # 进入工作目录
 cd ~/.openclaw/workspace || exit 1
 
 # 检查 Git 仓库
 if [ ! -d ".git" ]; then
-    warn "⚠️  当前目录不是 Git 仓库，初始化中..."
-    git init
-    log "✅ Git 仓库已初始化"
+    error "当前目录不是 Git 仓库"
+    exit 1
 fi
 
 # 添加重要文件
@@ -51,20 +53,48 @@ done
 # 检查是否有改动
 if git diff --cached --quiet; then
     log "✨ 没有新的改动需要提交"
+    log "📊 本地和远程仓库保持一致"
     exit 0
 fi
 
-# 提交
-COMMIT_MSG="Daily backup: $DATE"
-git commit -m "$COMMIT_MSG"
-log "✅ 已提交: $COMMIT_MSG"
+# 有改动，先检查远程
+log "🔍 检测到改动，检查远程仓库状态..."
 
-# 推送到远程仓库（如果配置了）
 if git remote | grep -q "origin"; then
+    # 拉取最新远程状态（不合并，只检查）
+    log "📡 拉取远程仓库状态..."
+    git fetch origin >/dev/null 2>&1 || warn "无法连接远程仓库"
+
+    # 检查本地和远程是否有差异
+    if git diff --cached origin/main --quiet 2>/dev/null; then
+        if git diff --cached origin/master --quiet 2>/dev/null; then
+            log "⚠️  虽然本地有改动，但内容与远程仓库相同"
+            log "📊 无需提交"
+            exit 0
+        fi
+    fi
+
+    # 提交
+    COMMIT_MSG="Daily backup: $DATE $TIME"
+    git commit -m "$COMMIT_MSG"
+    log "✅ 已提交: $COMMIT_MSG"
+
+    # 推送
     log "🚀 推送到远程仓库..."
-    git push origin main 2>&1 || git push origin master 2>&1 || warn "⚠️  推送失败，请检查远程仓库配置"
+    if git push origin main 2>&1; then
+        log "✅ 推送成功！"
+    elif git push origin master 2>&1; then
+        log "✅ 推送成功！"
+    else
+        error "❌ 推送失败，请检查网络连接"
+        exit 1
+    fi
 else
-    warn "⚠️  没有配置远程仓库 (git remote add origin <your-repo-url>)"
+    # 没有远程仓库，只提交不推送
+    COMMIT_MSG="Daily backup: $DATE $TIME (no remote)"
+    git commit -m "$COMMIT_MSG"
+    log "✅ 已提交本地（未配置远程仓库）"
+    warn "💡 建议配置远程仓库: git remote add origin <url>"
 fi
 
 log "✨ 备份完成！"
