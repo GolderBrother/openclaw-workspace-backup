@@ -36,6 +36,8 @@
 - 浏览器自动化测试 (2026-02-26) ✅
 - 微信公众号文章访问（待解决）
 - 清理 nano banana 生图模型待办重复记录（保留1条）⚠️
+- 验证智谱 GLM-4V 图像生成能力（2026-02-28）
+- 确认 zaicode provider API 地址是否正确（2026-02-28）
 
 ### 学到的教训
 - Workspace整理很重要，文件要齐全
@@ -54,6 +56,26 @@
 - 飞书 bindings 缺少 peer.id 导致 @ 无效 → 已修复
 - 需要定期监控会话状态和 context 使用率
 - **Telegram accounts 不支持 username 字段** - 添加导致 gateway 启动失败（2026-02-26）
+- Exec 进程异常终止（gentle-v, nimble-h SIGTERM）→ 需要监控（2026-02-28）
+
+**模型提供商配置（2026-02-28）：**
+- **zaicode provider**（智谱海外版）: https://api.z.ai/api/anthropic
+  - 支持模型：GLM-4.6, GLM-4.7, GLM-4.5, GLM-4.5-Air
+  - API 兼容：Anthropic Messages API
+  - ⚠️ 需要确认是否支持图像输入（GLM-4V）
+- **edgefn provider**: https://api.edgefn.net/v1
+  - 支持模型：GLM-5, GLM-4.7, DeepSeek-V3.2, MiniMax-M2.5
+  - API 兼容：OpenAI Completions API
+- **moonshot provider**: https://api.moonshot.cn/v1
+  - 支持模型：kimi-k2.5（支持 reasoning + 图像输入）
+  - API 兼容：OpenAI Completions API
+
+**智谱模型调研（2026-02-28）：**
+- 海外 API 地址：https://api.z.ai/v1/（官方 Z.ai 平台）
+- OpenClaw 集成文档：https://docs.bigmodel.cn/cn/coding-plan/tool/openclaw
+- 支持的模型：GLM-4.6, GLM-4.7, GLM-4V（多模态）
+- MCP 集成：视觉理解、联网搜索、网页读取、开源仓库
+- IDE 插件：Claude Code, OpenCode, Cursor
 
 ### Telegram 配置重要教训（2026-02-26）
 - ❌ 不要给 `channels.telegram.accounts` 添加 `username` 字段
